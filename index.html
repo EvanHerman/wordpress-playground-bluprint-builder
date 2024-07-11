@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>WordPress Playground Blueprint Builder</title>
+
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="./src/css/styles.css">
+
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+	<main>
+
+		<div class="blueprint-builder-wrapper">
+			<div class="blueprint-builder-container">
+
+				<!-- Sidebar content area (33% width) -->
+				<div class="blueprint-builder-sidebar">
+					<div class="blueprint-builder-content">
+						<h2>Options</h2>
+						<p>This is the main content area.</p>
+						<hr />
+
+						<div class="section">
+							<label for="php-version">PHP Version:</label>
+							<select id="php-version">
+								<option value="7.0">7.0</option>
+								<option value="7.1">7.1</option>
+								<option value="7.2">7.2</option>
+								<option value="7.3">7.3</option>
+								<option value="7.4">7.4</option>
+								<option value="8.0">8.0</option>
+								<option value="8.1">8.1</option>
+								<option value="8.2">8.2</option>
+								<option value="8.3" selected>8.3</option>
+							</select>
+						</div>
+
+						<div class="section">
+							<label for="wp-version">WordPress Version:</label>
+							<select id="wp-version">
+								<option value="6.2">6.2</option>
+								<option value="6.3">6.3</option>
+								<option value="6.4">6.4</option>
+								<option value="6.5" selected>6.5</option>
+								<option value="beta">Beta</option>
+								<option value="nightly">Nightly Build</option>
+							</select>
+						</div>
+
+						<hr />
+
+						<div class="section">
+							<h2>Steps</h2>
+							<div class="steps">
+								<a href="#" class="step" data-step="install-plugin">Install Plugin</a>
+								<a href="#" class="step" data-step="install-theme">Install Theme</a>
+								<a href="#" class="step" data-step="set-site-options">Set Site Options</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Main content area (66% width) -->
+				<div class="blueprint-builder-main-content">
+					<a href="#" class="button test-blueprint">Launch Playground</a>
+
+					<div class="blueprint-builder-content">
+
+						<div id="tabs">
+							<ul>
+								<li><a href="#blueprint-fields">Steps</a></li>
+								<li><a href="#blueprint-markup">Blueprint</a></li>
+							</ul>
+
+							<div id="blueprint-fields">
+								<h3>Add steps from the left hand sidebar.</h3>
+								<ul class="step-list"></ul>
+							</div>
+
+							<div id="blueprint-markup">
+								<p class="description">This is the markup used to generate a WordPress Playground site.</p>
+								<button class="copy-blueprint">Copy Blueprint</button>
+								<textarea class="blueprint-json" rows="30" cols="60" disabled>
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "6.5"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    }
+  ]
+}
+								</textarea>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Modals -->
+		<div id="install-plugin-modal" title="Install a Plugin">
+			<p class="validateTips">Search for a plugin to install.</p>
+			<form class="plugin-search">
+				<input type="text" id="plugin-search" placeholder="Search for plugins...">
+				<button type="submit" id="plugin-search-button">Search</button>
+			</form>
+			<div id="plugin-results">
+				<img class="hidden plugin-preloader" src="./preloader.gif" alt="Preloader">
+				<div class="results"></div>
+			</div>
+		</div>
+
+		<div id="install-theme-modal" title="Install a Theme">
+			<p class="validateTips">Search for a theme to install.</p>
+			<form class="theme-search">
+				<input type="text" id="theme-search" placeholder="Search for themes...">
+				<button type="submit" id="theme-search-button">Search</button>
+			</form>
+			<div id="theme-results">
+				<img class="hidden theme-preloader" src="./preloader.gif" alt="Preloader">
+				<div class="results"></div>
+			</div>
+		</div>
+
+		<div id="set-site-options-modal" title="Set Site Options">
+			<p class="validateTips">Set the site options. Here you can set site options for the playground instance. <em>For example: blogname, permalink_structure etc.</em></p>
+			<div class="site-options">
+				<div class="duplicate">
+					<input type="text" class="option-name" placeholder="Option Name">
+					<input type="text" class="option-value" placeholder="Option Value">
+					<button class="duplicate-row">+</button>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+			<p>&copy; 2024 Evan Herman. All rights reserved.</p>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js" integrity="sha256-sw0iNNXmOJbQhYFuC9OF2kOlD5KQKe1y5lfBn4C9Sjg=" crossorigin="anonymous"></script>
+
+	<script src="./src/js/blueprint-builder.js"></script>
+</body>
+</html>
